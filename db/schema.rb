@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_04_15_124125) do
+ActiveRecord::Schema[7.2].define(version: 2025_04_21_075215) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -75,6 +75,30 @@ ActiveRecord::Schema[7.0].define(version: 2024_04_15_124125) do
     t.boolean "enabled"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "meetings", force: :cascade do |t|
+    t.bigint "chapter_id", null: false
+    t.integer "meeting_type", default: 0, null: false
+    t.string "topic", null: false
+    t.text "description"
+    t.string "speaker", null: false
+    t.bigint "user_id", null: false
+    t.datetime "start_date"
+    t.datetime "end_date"
+    t.string "venue"
+    t.string "venue_map"
+    t.boolean "is_panel", default: false
+    t.string "panel_members", default: [], array: true
+    t.boolean "is_chapter_member", default: false
+    t.boolean "is_organization_member", default: false
+    t.integer "status"
+    t.integer "location", default: 0, null: false
+    t.string "meeting_link"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["chapter_id"], name: "index_meetings_on_chapter_id"
+    t.index ["user_id"], name: "index_meetings_on_user_id"
   end
 
   create_table "motor_alert_locks", force: :cascade do |t|
@@ -323,6 +347,8 @@ ActiveRecord::Schema[7.0].define(version: 2024_04_15_124125) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "meetings", "chapters"
+  add_foreign_key "meetings", "users"
   add_foreign_key "motor_alert_locks", "motor_alerts", column: "alert_id"
   add_foreign_key "motor_alerts", "motor_queries", column: "query_id"
   add_foreign_key "motor_note_tag_tags", "motor_note_tags", column: "tag_id"
