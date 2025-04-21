@@ -34,6 +34,30 @@
 #  fk_rails_...  (user_id => users.id)
 #
 class Meeting < ApplicationRecord
+  # Associations
   belongs_to :chapter
   belongs_to :user
+
+  # Enums
+  enum meeting_type: {
+    meetup: 0,
+    social_hangout: 1,
+    webinar: 2,
+    workshop: 3,
+    panel_discussion: 4,
+    conference: 5,
+    outreach: 6,
+    hackathon: 7,
+    other: 8
+  }
+  enum status: {
+    draft: 0,
+    active: 1,
+    completed: 2,
+    cancelled: 3
+  }
+  enum location: {
+    physical: 0,
+    virtual: 1
+  }
 end

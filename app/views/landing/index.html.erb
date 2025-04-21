@@ -1,19 +1,23 @@
-<%= render 'landing/home/intro' %>
+<% if current_user && current_user.chapter_admin?%>
+  <%= render 'chapters/admin/dashboard'%>
+<% else %>
+  <%= render 'landing/home/intro' %>
 
-<% if FeatureFlag.find_by(name: 'events').try(:enabled) %>
-  <%= render 'landing/home/coming_up_events' %>
-<% end %>
+    <% if FeatureFlag.find_by(name: 'events').try(:enabled) %>
+      <%= render 'landing/home/coming_up_events' %>
+    <% end %>
 
-<%= render 'landing/home/who_we_are' %>
+    <%= render 'landing/home/who_we_are' %>
 
-<%= render 'landing/home/activities' %>
+    <%= render 'landing/home/activities' %>
 
-<% if FeatureFlag.find_by(name: 'projects').try(:enabled) %>
-  <%= render 'landing/home/projects' %>
-<% end %>
+    <% if FeatureFlag.find_by(name: 'projects').try(:enabled) %>
+      <%= render 'landing/home/projects' %>
+    <% end %>
 
-<%= render 'landing/home/chapters' %>
+    <%= render 'landing/home/chapters' %>
 
-<%= render 'landing/home/featured_sponsors' %>
+    <%= render 'landing/home/featured_sponsors' %>
 
-<%= render 'landing/home/previous_sponsors' %>
+    <%= render 'landing/home/previous_sponsors' %>
+<% end%>
