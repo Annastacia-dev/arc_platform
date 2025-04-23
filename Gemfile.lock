@@ -183,6 +183,9 @@ GEM
       raabro (~> 1.4)
     globalid (1.2.1)
       activesupport (>= 6.1)
+    heroicons-rails (1.2.0)
+      actionpack (>= 6.0.0)
+      railties (>= 6.0.0)
     htmlentities (4.3.4)
     i18n (1.14.7)
       concurrent-ruby (~> 1.0)
@@ -446,6 +449,7 @@ DEPENDENCIES
   devise
   dockerfile-rails (>= 1.2)
   faker (~> 3.1)
+  heroicons-rails (~> 1.2)
   image_processing (~> 1.2)
   jbuilder
   jsbundling-rails

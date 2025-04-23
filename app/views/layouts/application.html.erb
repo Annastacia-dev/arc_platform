@@ -13,16 +13,32 @@
 </head>
 
 <body>
-  <div class="bg-gray-50">
-
-    <%= render 'layouts/navbar' %>
-
-    <main class="mx-8" style="min-height: 45vh">
-      <%= yield %>
-    </main>
+  <div class="flex min-h-screen">
+    
+    <% if current_user %>
+      <!-- Sidebar on the left -->
+      <aside class="hidden md:flex flex-col w-56">
+        <%= render 'layouts/sidebar' %>
+      </aside>
+      
+      <!-- Main content on the right -->
+      <div class="flex-1 flex flex-col">
+        <main class="flex-1 px-8 py-6">
+          <%= yield %>
+        </main>
+      </div>
+    <% else %>
+      <div class="w-full">
+        <%= render 'layouts/navbar' %>
+        <main class="mx-8" style="min-height: 45vh">
+          <%= yield %>
+        </main>
+        <%= render 'layouts/footer' %>
+      </div>
+    <% end %>
 
     <%= render 'layouts/flash_messages' %>
-    <%= render 'layouts/footer' %>
   </div>
 </body>
+
 </html>

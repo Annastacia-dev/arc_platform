@@ -12,6 +12,7 @@ gem 'cancancan', '~> 3.4' # Authorization library which restricts what resources
 gem 'cssbundling-rails' # Bundle and process CSS [https://github.com/rails/cssbundling-rails]
 gem 'devise' # Devise 4.0 works with Rails 4.1 onwards.
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
+gem 'heroicons-rails', '~> 1.2'
 gem 'image_processing', '~> 1.2'
 gem 'jbuilder' # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem 'jsbundling-rails' # Bundle and transpile JavaScript [https://github.com/rails/jsbundling-rails]

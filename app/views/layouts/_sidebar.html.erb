@@ -1,0 +1,55 @@
+<ul class="hidden md:flex flex-col min-h-screen w-56 text-sm overflow-y-auto px-2 py-4 gap-4 bg-base-500 rounded-md shadow-lg"
+    data-controller="sidebar-dropdown">
+  <% sidebar_links.each do |item| %>
+    <% if item[:children] %>
+      <li class="px-4 flex flex-col gap-2 cursor-pointer"
+          data-action="click->sidebar-dropdown#toggle"
+          data-menu-id="<%= item[:menu_text] %>">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-4">
+            <%= heroicon_tag item[:icon], class: "w-4 h-4 text-gray-300" %>
+            <%= item[:menu_text] %>
+          </div>
+          <%= heroicon_tag "chevron-down", class: "h-4 w-4 ml-2 rotate-180", id: "#{item[:menu_text]}_icon" %>
+        </div>
+
+        <div id="<%= item[:menu_text] %>_dropdown" class="hidden mt-2 flex flex-col gap-2 pl-4">
+          <% item[:children].each do |child| %>
+            <% if child[:type] == 'button' %>
+              <%= button_to child[:path], method: child[:method], class: "px-1 py-2 flex items-center gap-3 #{child[:class]} #{child[:method] == :delete ? 'text-red-500' : ''}", data: (child[:method] == :delete ? { confirm: "Are you sure?", turbo_confirm: "Are you sure?" } : {}) do %>
+                <%= heroicon_tag child[:icon], class: "w-4 h-4 text-gray-400" %>
+                <span class="hover:underline"><%= child[:menu_text] %></span>
+              <% end %>
+            <% else %>
+              <%= link_to child[:path], class: "block px-1 py-2" do %>
+                <div class="flex gap-3 items-center">
+                  <%= heroicon_tag child[:icon], class: "w-4 h-4 text-gray-400" %>
+                  <span class="hover:underline"><%= child[:menu_text] %></span>
+                </div>
+              <% end %>
+            <% end %>
+          <% end %>
+        </div>
+      </li>
+    <% else %>
+      <li class="px-4 flex items-center gap-4 text-sm">
+        <% if item[:type] == 'button' %>
+          <%= button_to item[:path], method: item[:method], class: "flex items-center gap-3 #{item[:method] == :delete ? 'text-red-500' : ''}", data: (item[:method] == :delete ? { confirm: "Are you sure?", turbo_confirm: "Are you sure?" } : {}) do %>
+            <%= heroicon_tag item[:icon], class: "w-4 h-4 text-gray-300" %>
+            <span class="hover:underline"><%= item[:menu_text] %></span>
+          <% end %>
+        <% else %>
+          <%= link_to item[:path], class: "flex items-center gap-3 relative" do %>
+            <%= heroicon_tag item[:icon], class: "w-4 h-4 text-gray-300" %>
+            <span class="hover:underline"><%= item[:menu_text] %></span>
+            <% if item[:data] && !item[:data].to_i.zero? %>
+              <div class="absolute text-[10px] font-semibold border-2 border-gray-50  h-5 w-5 rounded-full text-white  flex items-center justify-center -top-2 left-2">
+                <%= item[:data] %>
+              </div>
+            <% end %>
+          <% end %>
+        <% end %>
+      </li>
+    <% end %>
+  <% end %>
+</ul>

@@ -12,3 +12,6 @@ application.register("removals", RemovalsController)
 
 import TurboFramesController from "./turbo_frames_controller.js"
 application.register("turbo_frames", TurboFramesController)
+
+import SidebarDropdownController from "./sidebar_dropdown_controller.js"
+application.register("sidebar-dropdown", SidebarDropdownController)
